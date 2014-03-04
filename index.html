@@ -4,6 +4,30 @@
     <script src="color.js"></script>
   </head>
   <body>
+    <h1>All 18-bit Colors</h1>
     <canvas id="canvas" width="512" height="512"></canvas>
+    <div class="description">
+      <p>
+        This canvas will slowly fill up at random with all 262,144
+        18-bit colors in a unique arrangement. This will take while, so
+        go get something to drink.
+      </p>
+      <p>
+        The algorithm works like this:
+      </p>
+      <ol>
+        <li>Pick a color and set the center pixel to this color.</li>
+        <li>Pick another color.</li>
+        <li>Find the colored edge pixel closest in color to this color.</li>
+        <li>Set one of its uncolored 8-adjacent pixels to this color.</li>
+        <li>Go to step 2 unless all pixels have been colored.</li>
+      </ol>
+      <p>
+        Inspired by
+        <a href="http://joco.name/2014/03/02/all-rgb-colors-in-one-image/">
+          All RGB colors in one image
+        </a>.
+      </p>
+    </div>
   </body>
 </html>

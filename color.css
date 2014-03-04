@@ -1,0 +1,22 @@
+body {
+    background: black;
+    font-family: sans-serif;
+    color: Gray;
+    width: 514px;
+    margin: auto;
+}
+
+a {
+    color: BurlyWood;
+}
+
+h1 {
+    text-align: center;
+    color: Salmon;
+    font-size: 28px;
+}
+
+canvas {
+    margin: auto;
+    border: 1px solid White;
+}
