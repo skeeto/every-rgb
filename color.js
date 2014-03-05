@@ -184,13 +184,13 @@ Pixel.prototype.neighbors = function(mx, my) {
  * @param {Number} channelbits number of bits per channel
  * @returns {Set} all possible colors (2^(channelbits*3) total)
  */
-function colorset(channelbits) {
-    var set = new Set();
+function colors(channelbits) {
+    var set = [];
     var s = Math.pow(2, 8 - channelbits);
     for (var r = 0; r < 256; r += s) {
         for (var g = 0; g < 256; g += s) {
             for (var b = 0; b < 256; b += s) {
-                set.add(new Color(r, g, b));
+                set.push(new Color(r, g, b));
             }
         }
     }
@@ -210,8 +210,8 @@ function Painter(w, h, channelbits) {
     this.h = h;
     this.pixels = new Set();
     this.edges = new Set();
-    this.colorset = colorset(channelbits);
-    this.edges.add(new Pixel(w / 2, h / 2, this.colorset.popRandom()));
+    this.colors = colors(channelbits).shuffle();
+    this.edges.add(new Pixel(w / 2, h / 2, this.colors.pop()));
     this.count = 1;
 }
 
@@ -230,7 +230,7 @@ Painter.prototype.render = function(n) {
     console.log('Completed ' + this.count);
     for (var i = 0; i < n && !this.isDone(); i++) {
         this.count++;
-        var next = this.colorset.popRandom(),
+        var next = this.colors.pop(),
             places = this.edges.asArray();
         places.forEach(function(p) {
             p._dist = p.color.dist(next);
