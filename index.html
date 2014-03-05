@@ -17,11 +17,12 @@
         The algorithm works like this:
       </p>
       <ol>
-        <li>Pick a color and set the center pixel to this color.</li>
-        <li>Pick another color.</li>
+        <li>Pick a color and set the a pixel to this color.</li>
+        <li>Repeat step 1 as many times as desired.</li>
+        <li>Pick a color.</li>
         <li>Find the colored edge pixel closest in color to this color.</li>
         <li>Set one of its uncolored 8-adjacent pixels to this color.</li>
-        <li>Go to step 2 unless all pixels have been colored.</li>
+        <li>Go to step 3 unless all pixels have been colored.</li>
       </ol>
       <p>
         Inspired by
