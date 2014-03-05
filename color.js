@@ -306,7 +306,7 @@ Painter.prototype.run = function(ctx, step) {
             window.clearInterval(timer);
             throw e;
         }
-        if (_this.done) {
+        if (_this.isDone()) {
             window.clearInterval(timer);
         }
     }, 1);
