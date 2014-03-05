@@ -211,9 +211,17 @@ function Painter(w, h, channelbits) {
     this.pixels = new Set();
     this.edges = new Set();
     this.colors = colors(channelbits).shuffle();
-    this.edges.add(new Pixel(w / 2, h / 2, this.colors.pop()));
-    this.count = 1;
+    this.count = 0;
+    this.seed(w / 4 * 1, h / 4 * 1);
+    this.seed(w / 4 * 3, h / 4 * 1);
+    this.seed(w / 4 * 1, h / 4 * 3);
+    this.seed(w / 4 * 3, h / 4 * 3);
 }
+
+Painter.prototype.seed = function(x, y) {
+    this.edges.add(new Pixel(x, y, this.colors.pop()));
+    this.count++;
+};
 
 /**
  * @returns {boolean} true if this Painter is complete
