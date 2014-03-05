@@ -308,5 +308,5 @@ window.addEventListener('load', function() {
     var n = 512;
     var canvas = document.querySelector('#canvas');
     var ctx = canvas.getContext('2d');
-    new Painter(n, n, 6).run(ctx, 16);
+    new Painter(n, n, 6).run(ctx, 32);
 });
