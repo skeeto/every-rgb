@@ -22,9 +22,9 @@ image_save(image *im, float gamma, FILE *out)
         for (uint32_t x = 0; x < im->width; x++) {
             color color = image_get(im, x, y);
             uint8_t *p = buffer + (y * im->width + x) * 3;
-            p[0] = powf(color.r, inv) * 255;
-            p[1] = powf(color.g, inv) * 255;
-            p[2] = powf(color.b, inv) * 255;
+            p[0] = powf(color.p.r, inv) * 255;
+            p[1] = powf(color.p.g, inv) * 255;
+            p[2] = powf(color.p.b, inv) * 255;
         }
     }
     fwrite(buffer, im->width * im->height, 3, out);

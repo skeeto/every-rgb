@@ -1,4 +1,4 @@
-CC      = cc -std=c11
+CC      = c99
 CFLAGS  = -Wall -Wextra -pedantic -g3 -Ofast
 LDLIBS  = -lm
 

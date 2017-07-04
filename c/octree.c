@@ -26,24 +26,24 @@ static bool
 octree_in_bounds(const octree *octree, color color)
 {
     return
-        color.r >= octree->bound[0].r &&
-        color.r <  octree->bound[1].r &&
-        color.g >= octree->bound[0].g &&
-        color.g <  octree->bound[1].g &&
-        color.b >= octree->bound[0].b &&
-        color.b <  octree->bound[1].b;
+        color.p.r >= octree->bound[0].p.r &&
+        color.p.r <  octree->bound[1].p.r &&
+        color.p.g >= octree->bound[0].p.g &&
+        color.p.g <  octree->bound[1].p.g &&
+        color.p.b >= octree->bound[0].p.b &&
+        color.p.b <  octree->bound[1].p.b;
 }
 
 static bool
 octree_in_radius(const octree *octree, color color, float radius)
 {
     return
-        color.r >= octree->bound[0].r - radius &&
-        color.r <  octree->bound[1].r + radius &&
-        color.g >= octree->bound[0].g - radius &&
-        color.g <  octree->bound[1].g + radius &&
-        color.b >= octree->bound[0].b - radius &&
-        color.b <  octree->bound[1].b + radius;
+        color.p.r >= octree->bound[0].p.r - radius &&
+        color.p.r <  octree->bound[1].p.r + radius &&
+        color.p.g >= octree->bound[0].p.g - radius &&
+        color.p.g <  octree->bound[1].p.g + radius &&
+        color.p.b >= octree->bound[0].p.b - radius &&
+        color.p.b <  octree->bound[1].p.b + radius;
 }
 
 
@@ -57,18 +57,18 @@ octree_split(octree *octree)
     color c1 = octree->bound[1];
     int i = 0;
     for (int r = 0; r < 2; r++) {
-        float hr = (c1.r - c0.r) / 2.0f;
+        float hr = (c1.p.r - c0.p.r) / 2.0f;
         for (int g = 0; g < 2; g++) {
-            float hg = (c1.g - c0.g) / 2.0f;
+            float hg = (c1.p.g - c0.p.g) / 2.0f;
             for (int b = 0; b < 2; b++) {
-                float hb = (c1.b - c0.b) / 2.0f;
+                float hb = (c1.p.b - c0.p.b) / 2.0f;
                 color bounds[2];
-                bounds[0].r = c0.r + hr * r;
-                bounds[0].g = c0.g + hg * g;
-                bounds[0].b = c0.b + hb * b;
-                bounds[1].r = bounds[0].r + hr;
-                bounds[1].g = bounds[0].g + hg;
-                bounds[1].b = bounds[0].b + hb;
+                bounds[0].p.r = c0.p.r + hr * r;
+                bounds[0].p.g = c0.p.g + hg * g;
+                bounds[0].p.b = c0.p.b + hb * b;
+                bounds[1].p.r = bounds[0].p.r + hr;
+                bounds[1].p.g = bounds[0].p.g + hg;
+                bounds[1].p.b = bounds[0].p.b + hb;
                 octree_init(octree->nodes + i++, bounds);
             }
         }

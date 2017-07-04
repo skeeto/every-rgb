@@ -152,7 +152,7 @@ main(int argc, char **argv)
                 for (int x = -1; x <= 1; x++) {
                     uint32_t tx = target.x + x;
                     uint32_t ty = target.y + y;
-                    if (image_get(image, tx, ty).a == 0)
+                    if (image_get(image, tx, ty).p.a == 0)
                         border[count++] = (edge){tx, ty, next_color};
                 }
             }
