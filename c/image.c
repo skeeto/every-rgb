@@ -1,4 +1,3 @@
-#define _BSD_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include "image.h"
@@ -16,19 +15,21 @@ image_create(uint32_t width, uint32_t height)
 void
 image_save(image *im, float gamma, FILE *out)
 {
+    uint8_t *buffer = malloc(im->width * im->height * 3);
     fprintf(out, "P6\n%d %d\n255\n", im->width, im->height);
-    flockfile(out);
     float inv = 1.0f / gamma;
     for (uint32_t y = 0; y < im->height; y++) {
         for (uint32_t x = 0; x < im->width; x++) {
             color color = image_get(im, x, y);
-            fputc_unlocked(powf(color.r, inv) * 255, out);
-            fputc_unlocked(powf(color.g, inv) * 255, out);
-            fputc_unlocked(powf(color.b, inv) * 255, out);
+            uint8_t *p = buffer + (y * im->width + x) * 3;
+            p[0] = powf(color.r, inv) * 255;
+            p[1] = powf(color.g, inv) * 255;
+            p[2] = powf(color.b, inv) * 255;
         }
     }
-    funlockfile(out);
-    fflush(stdout);
+    fwrite(buffer, im->width * im->height, 3, out);
+    fflush(out);
+    free(buffer);
 }
 
 void
